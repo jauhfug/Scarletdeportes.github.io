@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voleibol - DeportesCentral</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .top-bar {
+            background-color: rgba(0,0,0,0.3);
+            padding: 8px 0;
+            font-size: 14px;
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .date-info {
+            color: #ccc;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-box {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+            width: 200px;
+        }
+
+        .search-box::placeholder {
+            color: #ccc;
+        }
+
+        .search-btn {
+            background-color: #fd7e14;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .main-header {
+            padding: 15px 0;
+        }
+
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #fd7e14;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu li {
+            position: relative;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            background-color: #fd7e14;
+            transform: translateY(-2px);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .breadcrumb {
+            background-color: white;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .breadcrumb-nav {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .breadcrumb-nav a {
+            color: #fd7e14;
+            text-decoration: none;
+        }
+
+        .sport-header {
+            background: linear-gradient(135deg, #fd7e14 0%, #e55a00 100%);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .sport-title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .sport-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .league-tabs {
+            background-color: white;
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .tabs-container {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .tab-btn {
+            background: none;
+            border: 2px solid #fd7e14;
+            color: #fd7e14;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .tab-btn.active,
+        .tab-btn:hover {
+            background-color: #fd7e14;
+            color: white;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            padding: 30px 0;
+        }
+
+        .news-section {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .featured-article {
+            position: relative;
+            height: 400px;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('/placeholder.svg?height=400&width=800');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: end;
+            padding: 30px;
+            color: white;
+        }
+
+        .featured-content h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .author-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #fd7e14;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .social-share {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 5px;
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        .social-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .facebook { background-color: #3b5998; }
+        .twitter { background-color: #1da1f2; }
+        .whatsapp { background-color: #25d366; }
+        .email { background-color: #666; }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .news-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .news-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .league-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(253,126,20,0.9);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .news-content {
+            padding: 20px;
+        }
+
+        .news-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .news-excerpt {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .news-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #999;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .widget {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .widget-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+            border-bottom: 2px solid #fd7e14;
+            padding-bottom: 5px;
+        }
+
+        .match-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background-color: #f8f9fa;
+        }
+
+        .match-teams {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .team {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .team-logo {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #fd7e14;
+        }
+
+        .match-score {
+            font-size: 16px;
+            font-weight: bold;
+            color: #fd7e14;
+        }
+
+        .set-info {
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+        }
+
+        .live-indicator {
+            background-color: #dc3545;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .standings-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .standings-table th,
+        .standings-table td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .standings-table th {
+            background-color: #fd7e14;
+            color: white;
+            font-weight: bold;
+        }
+
+        .standings-table tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .position {
+            font-weight: bold;
+            color: #fd7e14;
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #1a1a2e;
+                flex-direction: column;
+                padding: 20px;
+                gap: 10px;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .sport-title {
+                font-size: 2rem;
+            }
+
+            .news-grid {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="top-bar">
+            <div class="container">
+                <div class="date-info">
+                    <i class="fas fa-calendar"></i>
+                    Martes, 17 de Junio 2025 | Noticias de Voleibol
+                </div>
+                <div class="search-container">
+                    <input type="text" class="search-box" placeholder="Buscar en voleibol...">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-header">
+            <div class="container">
+                <div class="logo">
+                    <i class="fas fa-volleyball-ball"></i>
+                    DeportesCentral
+                </div>
+                
+               <nav>
+                    <ul class="nav-menu" id="navMenu">
+                        <li><a href="/index.html" class="active">INICIO</a></li>
+                        <li><a href="/futbol.html">FÚTBOL</a></li>
+                        <li><a href="/beisbol.html">BÉISBOL</a></li>
+                        <li><a href="/voleibol.html">VOLEIBOL</a></li>
+                        <li><a href="/baloncesto.html">BALONCESTO</a></li>
+                        <li><a href="/tenis.html">TENIS</a></li>
+                    </ul>
+                </nav>
+                
+                <button class="mobile-menu-btn" onclick="toggleMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="breadcrumb">
+        <div class="container">
+            <nav class="breadcrumb-nav">
+                <a href="index.html">Inicio</a> / <strong>Voleibol</strong>
+            </nav>
+        </div>
+    </div>
+
+    <div class="sport-header">
+        <div class="container">
+            <h1 class="sport-title">🏐 VOLEIBOL</h1>
+            <p class="sport-subtitle">Lo mejor del voleibol mundial y olímpico</p>
+        </div>
+    </div>
+
+    <div class="league-tabs">
+        <div class="container">
+            <div class="tabs-container">
+                <button class="tab-btn active">Internacional</button>
+                <button class="tab-btn">Liga de Naciones</button>
+                <button class="tab-btn">Sudamericano</button>
+                <button class="tab-btn">Olímpicos</button>
+                <button class="tab-btn">Mundial</button>
+                <button class="tab-btn">Clubes</button>
+                <button class="tab-btn">Playa</button>
+            </div>
+        </div>
+    </div>
+
+    <main class="container">
+        <div class="main-content">
+            <section class="news-section">
+                <article class="featured-article">
+                    <div class="featured-content">
+                        <div class="article-meta">
+                            <div class="author-info">
+                                <div class="author-avatar">AS</div>
+                                <div>
+                                    <div>Ana Silva</div>
+                                    <div style="font-size: 12px; opacity: 0.8;">17/06/2025 - 06:30 pm</div>
+                                </div>
+                            </div>
+                            <div class="social-share">
+                                <button class="social-btn facebook"><i class="fab fa-facebook-f"></i></button>
+                                <button class="social-btn twitter"><i class="fab fa-twitter"></i></button>
+                                <button class="social-btn whatsapp"><i class="fab fa-whatsapp"></i></button>
+                                <button class="social-btn email"><i class="fas fa-envelope"></i></button>
+                            </div>
+                        </div>
+                        <h1>Brasil domina el Sudamericano Femenino de Voleibol</h1>
+                    </div>
+                </article>
+
+                <div class="news-grid">
+                    <article class="news-card">
+                        <div class="news-image" style="background-image: url('/placeholder.svg?height=200&width=300');">
+                            <span class="league-badge">SUDAMERICANO</span>
+                        </div>
+                        <div class="news-content">
+                            <h3 class="news-title">Brasil vence a Argentina y se corona campeón sudamericano</h3>
+                            <p class="news-excerpt">La selección brasileña femenina se impuso 3-0 en sets corridos ante las argentinas en la final disputada en Lima, Perú.</p>
+                            <div class="news-footer">
+                                <span>Hace 30 min</span>
+                                <span><i class="fas fa-eye"></i> 1.8k</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-image" style="background-image: url('/placeholder.svg?height=200&width=300');">
+                            <span class="league-badge">LIGA NACIONES</span>
+                        </div>
+                        <div class="news-content">
+                            <h3 class="news-title">Italia y Polonia clasifican a la Final Four masculina</h3>
+                            <p class="news-excerpt">Los europeos aseguran su lugar en la fase final de la Liga de Naciones tras vencer en sus respectivos compromisos.</p>
+                            <div class="news-footer">
+                                <span>Hace 2 horas</span>
+                                <span><i class="fas fa-eye"></i> 1.2k</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-image" style="background-image: url('/placeholder.svg?height=200&width=300');">
+                            <span class="league-badge">OLÍMPICOS</span>
+                        </div>
+                        <div class="news-content">
+                            <h3 class="news-title">Estados Unidos confirma su equipo para París 2024</h3>
+                            <p class="news-excerpt">El equipo femenino estadounidense anuncia su roster final con miras a defender el oro olímpico en los próximos Juegos.</p>
+                            <div class="news-footer">
+                                <span>Hace 4 horas</span>
+                                <span><i class="fas fa-eye"></i> 2.1k</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-image" style="background-image: url('/placeholder.svg?height=200&width=300');">
+                            <span class="league-badge">CLUBES</span>
+                        </div>
+                        <div class="news-content">
+                            <h3 class="news-title">Vakifbank ficha a la estrella brasileña Gabi</h3>
+                            <p class="news-excerpt">El club turco asegura los servicios de la opuesta brasileña, considerada una de las mejores jugadoras del mundo.</p>
+                            <div class="news-footer">
+                                <span>Hace 6 horas</span>
+                                <span><i class="fas fa-eye"></i> 1.5k</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-image" style="background-image: url('/placeholder.svg?height=200&width=300');">
+                            <span class="league-badge">PLAYA</span>
+                        </div>
+                        <div class="news-content">
+                            <h3 class="news-title">Dupla brasileña domina el circuito mundial de voleibol playa</h3>
+                            <p class="news-excerpt">Duda y Ana Patrícia se coronan campeonas en el torneo de Brasi

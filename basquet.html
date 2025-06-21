@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports App - Básquet</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2><i class="fas fa-trophy"></i> Sports App</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a href="futbol.html" class="nav-link">Fútbol</a>
+                </li>
+                <li class="nav-item">
+                    <a href="basquet.html" class="nav-link active">Básquet</a>
+                </li>
+                <li class="nav-item">
+                    <a href="voleybol.html" class="nav-link">Voleibol</a>
+                </li>
+                <li class="nav-item">
+                    <a href="tenis.html" class="nav-link">Tenis</a>
+                </li>
+                <li class="nav-item">
+                    <a href="beisbol.html" class="nav-link">Béisbol</a>
+                </li>
+            </ul>
+            <div class="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <section class="sport-hero basketball-hero">
+            <div class="hero-background">
+                <img src="/placeholder.svg?height=500&width=1200" alt="Basketball Background" class="hero-image">
+                <div class="hero-overlay"></div>
+            </div>
+            <div class="hero-content">
+                <div class="sport-icon-large">🏀</div>
+                <h1>Básquet</h1>
+                <p>El deporte de la canasta que emociona a millones alrededor del mundo</p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">2.2B+</span>
+                        <span class="stat-label">Fanáticos</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">30</span>
+                        <span class="stat-label">Equipos NBA</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">450M</span>
+                        <span class="stat-label">Jugadores</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="nba-games">
+            <div class="container">
+                <h2 class="section-title">NBA - Juegos de Hoy</h2>
+                <div class="games-slider">
+                    <div class="game-card">
+                        <div class="game-header">
+                            <span class="game-status live">EN VIVO Q3 8:45</span>
+                        </div>
+                        <div class="game-matchup">
+                            <div class="team home">
+                                <img src="/placeholder.svg?height=60&width=60" alt="Lakers">
+                                <div class="team-info">
+                                    <h3>Lakers</h3>
+                                    <span class="record">45-37</span>
+                                </div>
+                                <div class="team-score">98</div>
+                            </div>
+                            <div class="vs-divider">VS</div>
+                            <div class="team away">
+                                <div class="team-score">102</div>
+                                <div class="team-info">
+                                    <h3>Warriors</h3>
+                                    <span class="record">44-38</span>
+                                </div>
+                                <img src="/placeholder.svg?height=60&width=60" alt="Warriors">
+                            </div>
+                        </div>
+                        <div class="game-stats">
+                            <div class="stat">
+                                <span class="stat-label">Líder Anotador</span>
+                                <span class="stat-value">LeBron James - 28 pts</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="game-card">
+                        <div class="game-header">
+                            <span class="game-status upcoming">21:00 EST</span>
+                        </div>
+                        <div class="game-matchup">
+                            <div class="team home">
+                                <img src="/placeholder.svg?height=60&width=60" alt="Celtics">
+                                <div class="team-info">
+                                    <h3>Celtics</h3>
+                                    <span class="record">57-25</span>
+                                </div>
+                                <div class="team-score">-</div>
+                            </div>
+                            <div class="vs-divider">VS</div>
+                            <div class="team away">
+                                <div class="team-score">-</div>
+                                <div class="team-info">
+                                    <h3>Heat</h3>
+                                    <span class="record">44-38</span>
+                                </div>
+                                <img src="/placeholder.svg?height=60&width=60" alt="Heat">
+                            </div>
+                        </div>
+                        <div class="game-preview">
+                            <p><i class="fas fa-map-marker-alt"></i> TD Garden, Boston</p>
+                        </div>
+                    </div>
+
+                    <div class="game-card">
+                        <div class="game-header">
+                            <span class="game-status finished">FINAL</span>
+                        </div>
+                        <div class="game-matchup">
+                            <div class="team home">
+                                <img src="/placeholder.svg?height=60&width=60" alt="Nuggets">
+                                <div class="team-info">
+                                    <h3>Nuggets</h3>
+                                    <span class="record">53-29</span>
+                                </div>
+                                <div class="team-score">115</div>
+                            </div>
+                            <div class="vs-divider">VS</div>
+                            <div class="team away">
+                                <div class="team-score">108</div>
+                                <div class="team-info">
+                                    <h3>Suns</h3>
+                                    <span class="record">45-37</span>
+                                </div>
+                                <img src="/placeholder.svg?height=60&width=60" alt="Suns">
+                            </div>
+                        </div>
+                        <div class="game-highlights">
+                            <button class="highlights-btn">
+                                <i class="fas fa-play"></i> Ver Highlights
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="nba-stars">
+            <div class="container">
+                <h2 class="section-title">Estrellas de la NBA</h2>
+                <div class="stars-grid">
+                    <div class="star-card">
+                        <div class="star-image">
+                            <img src="/placeholder.svg?height=350&width=280" alt="LeBron James">
+                            <div class="star-overlay">
+                                <div class="star-stats">
+                                    <div class="stat-row">
+                                        <span class="stat-label">PPG</span>
+                                        <span class="stat-value">28.9</span>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span class="stat-label">RPG</span>
+                                        <span class="stat-value">8.3</span>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span class="stat-label">APG</span>
+                                        <span class="stat-value">6.8</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="star-info">
+                            <h3>LeBron James</h3>
+                            <p class="star-team">Los Angeles Lakers</p>
+                            <p class="star-position">Alero</p>
+                            <div class="star-achievements">
+                                <span class="achievement">4x Campeón NBA</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="star-card">
+                        <div class="star-image">
+                            <img src="/placeholder.svg?height=350&width=280" alt="Stephen Curry">
+                            <div class="star-overlay">
+                                <div class="star-stats">
+                                    <div class="stat-row">
+                                        <span class="stat-label">PPG</span>
+                                        <span class="stat-value">29.5</span>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span class="stat-label">3PM</span>
+                                        <span class="stat-value">4.8</span>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span class="stat-label">APG</span>
+                                        <span class="stat-value">6.1</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="star-info">
+                            <h3>Stephen Curry</h3>
+                            <p class="star-team">Golden State Warriors</p>
+                            <p class="star-position">Base</p>
+                            <div class="star-achievements">
+                                <span class="achievement">4x Campeón NBA</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="star-card">
+                        <div class="star-image">
+                            <img src="/placeholder.svg?height=350&width=280" alt="Giannis Antetokounmpo">
+                            <div class="star-overlay">
+                                <div class="star-stats">
+                                    <div class="stat-row">
+                                        <span class="stat-label">PPG</span>
+                                        <span class="stat-value">31.1</span>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span class="stat-label">RPG</span>
+                                        <span class="stat-value">11.8</span>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span class="stat-label">APG</span>
+                                        <span class="stat-value">5.7</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="star-info">
+                            <h3>Giannis Antetokounmpo</h3>
+                            <p class="star-team">Milwaukee Bucks</p>
+                            <p class="star-position">Ala-Pívot</p>
+                            <div class="star-achievements">
+                                <span class="achievement">1x Campeón NBA</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="star-card">
+                        <div class="star-image">
+                            <img src="/placeholder.svg?height=350&width=280" alt="Luka Dončić">
+                            <div class="star-overlay">
+                                <div class="star-stats">
+                                    <div class="stat-row">
+                                        <span class="stat-label">PPG</span>
+                                        <span class="stat-value">32.4</span>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span class="stat-label">RPG</span>
+                                        <span class="stat-value">8.6</span>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span class="stat-label">APG</span>
+                                        <span class="stat-value">8.0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="star-info">
+                            <h3>Luka Dončić</h3>
+                            <p class="star-team">Dallas Mavericks</p>
+                            <p class="star-position">Base</p>
+                            <div class="star-achievements">
+                                <span class="achievement">5x All-Star</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="nba-standings">
+            <div class="container">
+                <h2 class="section-title">Clasificaciones NBA</h2>
+                <div class="conferences-grid">
+                    <div class="conference">
+                        <h3><i class="fas fa-trophy"></i> Conferencia Este</h3>
+                        <div class="standings-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Pos</th>
+                                        <th>Equipo</th>
+                                        <th>G-P</th>
+                                        <th>%</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="playoff-spot">
+                                        <td>1</td>
+                                        <td>
+                                            <img src="/placeholder.svg?height=25&width=25" alt="Celtics">
+                                            Boston Celtics
+                                        </td>
+                                        <td>57-25</td>
+                                        <td>.695</td>
+                                    </tr>
+                                    <tr class="playoff-spot">
+                                        <td>2</td>
+                                        <td>
+                                            <img src="/placeholder.svg?height=25&width=25" alt="Bucks">
+                                            Milwaukee Bucks
+                                        </td>
+                                        <td>58-24</td>
+                                        <td>.707</td>
+                                    </tr>
+                                    <tr class="playoff-spot">
+                                        <td>3</td>
+                                        <td>
+                                            <img src="/placeholder.svg?height=25&width=25" alt="76ers">
+                                            Philadelphia 76ers
+                                        </td>
+                                        <td>54-28</td>
+                                        <td>.659</td>
+                                    </tr>
+                                    <tr class="playoff-spot">
+                                        <td>4</td>
+                                        <td>
+                                            <img src="/placeholder.svg?height=25&width=25" alt="Cavaliers">
+                                            Cleveland Cavaliers
+                                        </td>
+                                        <td>51-31</td>
+                                        <td>.622</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="conference">
+                        <h3><i class="fas fa-trophy"></i> Conferencia Oeste</h3>
+                        <div class="standings-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Pos</th>
+                                        <th>Equipo</th>
+                                        <th>G-P</th>
+                                        <th>%</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="playoff-spot">
+                                        <td>1</td>
+                                        <td>
+                                            <img src="/placeholder.svg?height=25&width=25" alt="Nuggets">
+                                            Denver Nuggets
+                                        </td>
+                                        <td>53-29</td>
+                                        <td>.646</td>
+                                    </tr>
+                                    <tr class="playoff-spot">
+                                        <td>2</td>
+                                        <td>
+                                            <img src="/placeholder.svg?height=25&width=25" alt="Grizzlies">
+                                            Memphis Grizzlies
+                                        </td>
+                                        <td>51-31</td>
+                                        <td>.622</td>
+                                    </tr>
+                                    <tr class="playoff-spot">
+                                        <td>3</td>
+                                        <td>
+                                            <img src="/placeholder.svg?height=25&width=25" alt="Kings">
+                                            Sacramento Kings
+                                        </td>
+                                        <td>48-34</td>
+                                        <td>.585</td>
+                                    </tr>
+                                    <tr class="playoff-spot">
+                                        <td>4</td>
+                                        <td>
+                                            <img src="/placeholder.svg?height=25&width=25" alt="Suns">
+                                            Phoenix Suns
+                                        </td>
+                                        <td>45-37</td>
+                                        <td>.549</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="basketball-highlights">
+            <div class="container">
+                <h2 class="section-title">Momentos Legendarios</h2>
+                <div class="highlights-grid">
+                    <div class="highlight-card">
+                        <div class="highlight-image">
+                            <img src="/placeholder.svg?height=250&width=400" alt="Michael Jordan">
+                            <div class="play-button">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="highlight-content">
+                            <h4>The Last Shot - Michael Jordan</h4>
+                            <p>El tiro que selló el sexto campeonato de los Bulls en 1998</p>
+                            <span class="highlight-date">1998 NBA Finals</span>
+                        </div>
+                    </div>
+
+                    <div class="highlight-card">
+                        <div class="highlight-image">
+                            <img src="/placeholder.svg?height=250&width=400" alt="Kobe Bryant">
+                            <div class="play-button">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="highlight-content">
+                            <h4>81 Puntos - Kobe Bryant</h4>
+                            <p>La segunda mayor anotación en un juego de la NBA</p>
+                            <span class="highlight-date">22 Enero 2006</span>
+                        </div>
+                    </div>
+
+                    <div class="highlight-card">
+                        <div class="highlight-image">
+                            <img src="/placeholder.svg?height=250&width=400" alt="LeBron Block">
+                            <div class="play-button">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="highlight-content">
+                            <h4>The Block - LeBron James</h4>
+                            <p>El tapón que cambió las Finales de 2016</p>
+                            <span class="highlight-date">2016 NBA Finals</span>
+                        </div>
+                    </div>
+
+                    <div class="highlight-card">
+                        <div class="highlight-image">
+                            <img src="/placeholder.svg?height=250&width=400" alt="Curry 3-pointer">
+                            <div class="play-button">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="highlight-content">
+                            <h4>Curry desde el logo</h4>
+                            <p>Triple imposible desde media cancha</p>
+                            <span class="highlight-date">2021 Playoffs</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fas fa-trophy"></i> Sports App</h3>
+                    <p>Tu fuente confiable de información deportiva</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Deportes</h4>
+                    <ul>
+                        <li><a href="futbol.html">Fútbol</a></li>
+                        <li><a href="basquet.html">Básquet</a></li>
+                        <li><a href="tenis.html">Tenis</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Información</h4>
+                    <ul>
+                        <li><a href="#">Sobre Nosotros</a></li>
+                        <li><a href="#">Contacto</a></li>
+                        <li><a href="#">Política de Privacidad</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Sports App. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

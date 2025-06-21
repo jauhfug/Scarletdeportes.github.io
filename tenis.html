@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tenis - DeportesCentral</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .top-bar {
+            background-color: rgba(0,0,0,0.3);
+            padding: 8px 0;
+            font-size: 14px;
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .date-info {
+            color: #ccc;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-box {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+            width: 200px;
+        }
+
+        .search-box::placeholder {
+            color: #ccc;
+        }
+
+        .search-btn {
+            background-color: #17a2b8;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .main-header {
+            padding: 15px 0;
+        }
+
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #17a2b8;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu li {
+            position: relative;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            background-color: #17a2b8;
+            transform: translateY(-2px);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .breadcrumb {
+            background-color: white;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .breadcrumb-nav {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .breadcrumb-nav a {
+            color: #17a2b8;
+            text-decoration: none;
+        }
+
+        .sport-header {
+            background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .sport-title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .sport-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .league-tabs {
+            background-color: white;
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .tabs-container {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .tab-btn {
+            background: none;
+            border: 2px solid #17a2b8;
+            color: #17a2b8;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .tab-btn.active,
+        .tab-btn:hover {
+            background-color: #17a2b8;
+            color: white;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            padding: 30px 0;
+        }
+
+        .news-section {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .featured-article {
+            position: relative;
+            height: 400px;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('/placeholder.svg?height=400&width=800');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: end;
+            padding: 30px;
+            color: white;
+        }
+
+        .featured-content h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .author-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #17a2b8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .social-share {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 5px;
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        .social-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .facebook { background-color: #3b5998; }
+        .twitter { background-color: #1da1f2; }
+        .whatsapp { background-color: #25d366; }
+        .email { background-color: #666; }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .news-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .news-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .tournament-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(23,162,184,0.9);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .news-content {
+            padding: 20px;
+        }
+
+        .news-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .news-excerpt {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .news-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #999;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .widget {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .widget-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+            border-bottom: 2px solid #17a2b8;
+            padding-bottom: 5px;
+        }
+
+        .match-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background-color: #f8f9fa;
+        }
+
+        .match-players {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .player {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .player-flag {
+            width: 20px;
+            height: 15px;
+            border-radius: 2px;
+            background-color: #17a2b8;
+        }
+
+        .match-score {
+            font-size: 16px;
+            font-weight: bold;
+            color: #17a2b8;
+        }
+
+        .set-info {
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+        }
+
+        .live-indicator {
+            background-color: #dc3545;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .rankings-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .rankings-table th,
+        .rankings-table td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .rankings-table th {
+            background-color: #17a2b8;
+            color: white;
+            font-weight: bold;
+        }
+
+        .rankings-table tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .position {
+            font-weight: bold;
+            color: #17a2b8;
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #1a1a2e;
+                flex-direction: column;
+                padding: 20px;
+                gap: 10px;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .sport-title {
+                font-size: 2rem;
+            }
+
+            .news-grid {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="top-bar">
+            <div class="container">
+                <div class="date-info">
+                    <i class="fas fa-calendar"></i>
+                    Martes, 17 de Junio 2025 | Noticias de Tenis
+                </div>
+                <div class="search-container">
+                    <input type="text" class="search-box" placeholder="Buscar en tenis...">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-header">
+            <div class="container">
+                <div class="logo">
+                    <i class="fas fa-table-tennis"></i>
+                    DeportesCentral
+                </div>
+                
+          <nav>
+                    <ul class="nav-menu" id="navMenu">
+                        <li><a href="/index.html" class="active">INICIO</a></li>
+                        <li><a href="/futbol.html">FÚTBOL</a></li>
+                        <li><a href="/beisbol.html">BÉISBOL</a></li>
+                        <li><a href="/voleibol.html">VOLEIBOL</a></li>
+                        <li><a href="/baloncesto.html">BALONCESTO</a></li>
+                        <li><a href="/tenis.html">TENIS</a></li>
+                    </ul>
+                </nav>
+                
+                <button class="mobile-menu-btn" onclick="toggleMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="breadcrumb">
+        <div class="container">
+            <nav class="breadcrumb-nav">
+                <a href="index.html">Inicio</a> / <strong>Tenis</strong>
+            </nav>
+        </div>
+    </div>
+
+    <div class="sport-header">
+        <div class="container">
+            <h1 class="sport-title">🎾 TENIS</h1>
+            <p class="sport-subtitle">Lo mejor del tenis mundial y los Grand Slams</p>
+        </div>
+    </div>
+
+    <div class="league-tabs">
+        <div class="container">
+            <div class="tabs-container">
+                <button class="tab-btn active">ATP</button>
+                <button class="tab-btn">WTA</button>
+                <button class="tab-btn">Wimbledon</button>
+                <button class="tab-btn">Roland Garros</button>
+                <button class="tab-btn">US Open</button>
+                <button class="tab-btn">Australian Open</button>
+                <button class="tab-btn">Masters 1000</button>
+            </div>
+        </div>
+    </div>
+
+    <main class="container">
+        <div class="main-content">
+            <section class="news-section">
+                <article class="featured-article">
+                    <div class="featured-content">
+                        <div class="article-meta">
+                            <div class="author-info">
+                                <div class="author-avatar">LM</div>
+                                <div>
+                                    <div>Laura Martínez</div>
+                                    <div style="font-size: 12px; opacity: 0.8;">17/06/2025 - 05:45 pm</div>
+                                </div>
+                            </div>
+                            <div class="social-share">
+                                <button class="social-btn facebook"><i class="fab fa-facebook-f"></i></button>
+                                <button class="social-btn twitter"><i class="fab fa-twitter"></i></button>
+                                <button class="social-btn whatsapp"><i class="fab fa-whatsapp"></i></button>
+                                <button class="social-btn email"><i class="fas fa-envelope"></i></button>
+                            </div>
+                        </div>
+                        <h1>Djokovic confirma su participación en Wimbledon 2025</h1>
+                    </div>
+                </article>
+
+                <div class="news-grid">
+                    <article class="news-card">
+                        <div class="news-image" style="background-image: url('/placeholder.svg?height=200&width=300');">
+                            <span class="tournament-badge">WIMBLEDON</span>
+                        </div>
+                        <div class="news-content">
+                            <h3 class="news-title">Djokovic busca su octavo título en el All England Club</h3>
+                            <p class="news-excerpt">El serbio confirma su participación en Wimbledon tras recuperarse completamente de su lesión en la rodilla derecha.</p>
+                            <div class="news-footer">
+                                <span>Hace 45 min</span>
+                                <span><i class="fas fa-eye"></i> 2.3k</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-image" style="background-image: url('/placeholder.svg?height=200&width=300');">
+                            <span class="tournament-badge">ROLAND GARROS</span>
+                        </div>
+                        <div class="news-content">
+                            <h3 class="news-title">Nadal anuncia su retiro definitivo del tenis profesional</h3>
+                            <p class="news-excerpt">El Rey de la Arcilla confirma que Roland Garros 2025 será su último torneo como tenista profesional tras 20 años de carrera.</p>
+                            <div class="news-footer">
+                                <span>Hace 2 horas</span>
+                                <span><i class="fas fa-eye"></i> 4.1k</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-image" style="background-image: url('/placeholder.svg?height=200&width=300');">
+                            <span class="tournament-badge">WTA</span>
+                        </div>
+                        <div class="news-content">
+                            <h3 class="news-title">Iga Swiatek domina el ranking WTA por tercer año consecutivo</h3>
+                            <p class="news-excerpt">La polaca mantiene su posición como número uno mundial tras su brillante actuación en la temporada de arcilla europea.</p>
+                            <div class="news-footer">
+                                <span>Hace 4 horas</span>
+                                <span><i class="fas fa-eye"></i> 1.7k</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-image" style="background-image: url('/placeholder.svg?height=200&width=300');">
+                            <span class="tournament-badge">ATP</span>
+                        </div>
+                        <div class="news-content">
+                            <h3 class="news-title">Alcaraz se corona campeón del Masters 1000 de Roma</h3>
+                            <p class="news-excerpt">El español vence a Sinner en una épica final de tres sets para conquistar su segundo título en la capital italiana.</p>
+                            <div class="news-footer">
+                                <span>Hace 6 horas</span>
+                                <span><i class="fas fa-eye"></i> 2.8k</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-image" style="background-image: url('/placeholder.svg?height=200&width=300');">
+                            <span class="tournament-badge">US OPEN</span>
+                        </div>
+                        <div class="news-content">
+                            <h3 class="news-title">US Open anuncia aumento en el premio monetario para 2025</h3>
+                            <p class="news-excerpt">El último Grand Slam del año incrementa su bolsa de premios a 75 millones de dólares, estableciendo un nuevo récord.</p>
+                            <div class="news-footer">
+                                <span>Hace 8 horas</span>
+                                <span><i class="fas fa-eye"></i> 1.2k</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-image" style="background-image: url('/placeholder.svg?height=200&width=300');">
+                            <span class="tournament-badge">AUSTRALIAN OPEN</span>
+                        </div>
+                        <div class="news-content">
+                            <h3 class="news-title">Melbourne Park renovará sus cancelas para el Australian Open 2026</h3>
+                            <p class="news-excerpt">Tennis Australia anuncia una inversión de 500 millones de dólares para modernizar las instalaciones del primer Grand Slam.</p>
+                            <div class="news-footer">
+                                <span>Hace 12 horas</span>
+                                <span><i class="fas fa-eye"></i> 956</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <aside class="sidebar">
+                <div class="widget">
+                    <h3 class="widget-title">Partidos en Vivo</h3>
+                    <div class="match-item">
+                        <div class="match-players">
+                            <div class="player">
+                                <div class="player-flag"></div>
+                                <span>C. Alcaraz</span>
+                            </div>
+                            <div class="player">
+                                <div class="player-flag"></div>
+                                <span>J. Sinner</span>
+                            </div>
+                        </div>
+                        <div class="match-info">
+                            <div class="match-score">6-4, 3-2</div>
+                            <div class="set-info">
+                                <span class="live-indicator">EN VIVO</span>
+                                <div>2° Set</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="match-item">
+                        <div class="match-players">
+                            <div class="player">
+                                <div class="player-flag"></div>
+                                <span>I. Swiatek</span>
+                            </div>
+                            <div class="player">
+                                <div class="player-flag"></div>
+                                <span>A. Sabalenka</span>
+                            </div>
+                        </div>
+                        <div class="match-info">
+                            <div class="match-score">6-3, 6-2</div>
+                            <div class="set-info">
+                                <div style="color: #17a2b8; font-weight: bold;">FINAL</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="widget">
+                    <h3 class="widget-title">Ranking ATP Top 10</h3>
+                    <table class="rankings-table">
+                        <thead>
+                            <tr>
+                                <th>Pos</th>
+                                <th>Jugador</th>
+                                <th>Pts</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="position">1</td>
+                                <td>N. Djokovic</td>
+                                <td><strong>9,945</strong></td>
+                            </tr>
+                            <tr>
+                                <td class="position">2</td>
+                                <td>C. Alcaraz</td>
+                                <td><strong>8,770</strong></td>
+                            </tr>
+                            <tr>
+                                <td class="position">3</td>
+                                <td>J. Sinner</td>
+                                <td><strong>7,980</strong></td>
+                            </tr>
+                            <tr>
+                                <td class="position">4</td>
+                                <td>D. Medvedev</td>
+                                <td><strong>6,530</strong></td>
+                            </tr>
+                            <tr>
+                                <td class="position">5</td>
+                                <td>S. Tsitsipas</td>
+                                <td><strong>5,770</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="widget">
+                    <h3 class="widget-title">Próximos Torneos</h3>
+                    <div class="match-item">
+                        <div class="match-players">
+                            <div style="font-weight: bold; color: #17a2b8;">Wimbledon</div>
+                            <div style="font-size: 12px; color: #666;">Londres, Inglaterra</div>
+                        </div>
+                        <div class="match-info">
+                            <div class="set-info">
+                                <div>1-14 Jul</div>
+                                <div>2025</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="match-item">
+                        <div class="match-players">
+                            <div style="font-weight: bold; color: #17a2b8;">US Open</div>
+                            <div style="font-size: 12px; color: #666;">Nueva York, EE.UU.</div>
+                        </div>
+                        <div class="match-info">
+                            <div class="set-info">
+                                <div>26 Ago</div>
+                                <div>8 Sep</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <script>
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

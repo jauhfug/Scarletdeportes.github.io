@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Béisbol - DeportesCentral</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .top-bar {
+            background-color: rgba(0,0,0,0.3);
+            padding: 8px 0;
+            font-size: 14px;
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .date-info {
+            color: #ccc;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-box {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+            width: 200px;
+        }
+
+        .search-box::placeholder {
+            color: #ccc;
+        }
+
+        .search-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .main-header {
+            padding: 15px 0;
+        }
+
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #dc3545;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu li {
+            position: relative;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            background-color: #dc3545;
+            transform: translateY(-2px);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .breadcrumb {
+            background-color: white;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .breadcrumb-nav {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .breadcrumb-nav a {
+            color: #dc3545;
+            text-decoration: none;
+        }
+
+        .sport-header {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .sport-title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .sport-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .league-tabs {
+            background-color: white;
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .tabs-container {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .tab-btn {
+            background: none;
+            border: 2px solid #dc3545;
+            color: #dc3545;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .tab-btn.active,
+        .tab-btn:hover {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            padding: 30px 0;
+        }
+
+        .news-section {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .featured-article {
+            position: relative;
+            height: 400px;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('/placeholder.svg?height=400&width=800');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: end;
+            padding: 30px;
+            color: white;
+        }
+
+        .featured-content h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .author-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #dc3545;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .social-share {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 5px;
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        .social-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .facebook { background-color: #3b5998; }
+        .twitter { background-color: #1da1f2; }
+        .whatsapp { background-color: #25d366; }
+        .email { background-color: #666; }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .news-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .news-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .league-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(220,53,69,0.9);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .news-content {
+            padding: 20px;
+        }
+
+        .news-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .news-excerpt {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .news-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #999;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .widget {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .widget-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+            border-bottom: 2px solid #dc3545;
+            padding-bottom: 5px;
+        }
+
+        .game-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background-color: #f8f9fa;
+        }
+
+        .game-teams {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .team {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .team-logo {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #dc3545;
+        }
+
+        .game-score {
+            font-size: 18px;
+            font-weight: bold;
+            color: #dc3545;
+        }
+
+        .inning-info {
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+        }
+
+        .live-indicator {
+            background-color: #dc3545;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .standings-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .standings-table th,
+        .standings-table td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .standings-table th {
+            background-color: #dc3545;
+            color: white;
+            font-weight: bold;
+        }
+
+        .standings-table tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .position {
+            font-weight: bold;
+            color: #dc3545;
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #1a1a2e;
+                flex-direction: column;
+                padding: 20px;
+                gap: 10px;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .sport-title {
+                font-size: 2rem;
+            }
+
+            .news-grid {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="top-bar">
+            <div class="container">
+                <div class="date-info">
+                    <i class="fas fa-calendar"></i>
+                    Martes, 17 de Junio 2025 | Noticias de MLB
+                </div>
+                <div class="search-container">
+                    <input type="text" class="search-box" placeholder="Buscar en béisbol...">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-header">
+            <div class="container">
+                <div class="logo">
+                    <i class="fas fa-baseball-ball"></i>
+                    DeportesCentral
+                </div>
+                
+          <nav>
+                    <ul class="nav-menu" id="navMenu">
+                        <li><a href="/index.html" class="active">INICIO</a></li>
+                        <li><a href="/futbol.html">FÚTBOL</a></li>
+                        <li><a href="/beisbol.html">BÉISBOL</a></li>
+                        <li><a href="/voleibol.html">VOLEIBOL</a></li>
+                        <li><a href="/baloncesto.html">BALONCESTO</a></li>
+                        <li><a href="/tenis.html">TENIS</a></li>
+                    </ul>
+                </nav>
+                
+                <button class="mobile-menu-btn" onclick="toggleMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="breadcrumb">
+        <div class="container">
+            <nav class="breadcrumb-nav">
+                <a href="index.html">Inicio</a> / <strong>Béisbol</strong>
+            </nav>
+        </div>
+    </div>
+
+    <div class="sport-header">
+        <div class="container">
+            <h1 class="sport-title">⚾ BÉISBOL</h1>
+            <p class="sport-subtitle">Lo mejor de las Grandes Ligas y el béisbol mundial</p>
+        </div>
+    </div>
+
+    <div class="league-tabs">
+        <div class="container">
+            <div class="tabs-container">
+                <button class="tab-btn active">MLB</button>
+                <button class="tab-btn">Liga Americana</button>
+                <button class="tab-btn">Liga Nacional</button>
+                <button class="tab-btn">Playoffs</button>
+                <button class="tab-btn">World Series</button>
+                <button class="tab-btn">Ligas Menores</button>
+                <button class="tab-btn">Internacional</button>
+            </div>
+        </div>
+    </div>
+
+    <main class="container">
+        <div class="main-content">
+            <section class="news-section">
+                <article class="featured-article">
+                    <div class="featured-content">
+                        <div class="article-meta">
+                            <div class="author-info">
+                                <div class="author-avatar">CL</div>
+                                <div>
+                                    <div>Carlos López</div>
+                                    <div style="font-size: 12px; opacity: 0.8;">17/06/2025 - 07:45 pm</div>
+                                </div>
+                            </div>
+                            <div class="social-share">
+                                <button class="social-btn facebook"><i class="fab fa-facebook-f"></i></button>
+                                <button class="social-btn twitter"><i class="fab fa-twitter"></i></button>
+                                <button class="social-btn whatsapp"><i class="fab fa-whatsapp"></i></button>
+                                <button class="social-btn email"><i class="fas fa-envelope"></i></button>
+                            </div>
+                        </div>
+                        <h1>Yankees refuerzan su bullpen con estrella dominicana</h1>
+                    </div>
+                </article>
+
+                <div class="news-grid">
+                    <article class="news-card">
+                        <div class="news-image" style="background-image: url('/placeholder.svg?height=200&width=300');">
+                            <span class="league-badge">MLB</span>
+                        </div>
+                        <div class="news-content">
+                            <h3 class="news-title">Dodgers firman al pitcher japonés por 5 temporadas</h3>
+                            <p class="news-excerpt">Los Angeles asegura los servicios del as nipón con un contrato millonario que lo convierte en una de las adquisiciones del año.</p>
+                            <div class="news-footer">
+                                <span>Hace 1 hora</span>
+                                <span><i class="fas fa-eye"></i> 2.8k</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-image" style="background-image: url('/placeholder.svg?height=200&width=300');">
+                            <span class="league-badge">WORLD SERIES</span>
+                        </div>
+                        <div class="news-content">
+                            <h3 class="news-title">Astros y Braves favoritos para llegar a la Serie Mundial</h3>
+                            <p class="news-excerpt">Las casas de apuestas colocan a Houston y Atlanta como los principales candidatos para disputar el título de 2025.</p>
+                            <div class="news-footer">
+                                <span>Hace 3 horas</span>
+                                <span><i class="fas fa-eye"></i> 1.9k</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-image" style="background-image: url('/placeholder.svg?height=200&width=300');">
+                            <span class="league-badge">DRAFT</span>
+                        </div>
+                        <div class="news-content">
+                            <h3 class="news-title">Pirates seleccionan pitcher universitario en primera ronda</h3>
+                            <p class="news-excerpt">Pittsburgh apuesta por el futuro con la selección del lanzador zurdo más prometedor del draft universitario 2025.</p>
+                            <div class="news-footer">
+                                <span>Hace 5 horas</span>
+                                <span><i class="fas fa-eye"></i> 1.4k</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-image" style="background-image: url('/placeholder.svg?height=200&width=300');">
+                            <span class="league-badge">TRADE</span>
+                        </div>
+                        <div class="news-content">
+                            <h3 class="news-title">Red Sox intercambian a su estrella por tres prospectos</h3>
+                            <p class="news-excerpt">Boston sorprende al mercado al enviar a su slugger estrella a cambio de jóvenes talentos para reconstruir su futuro.</p>
+                            <div class="news-footer">
+                                <span>Hace 8 horas</span>
+                                <span><i class="fas fa-eye"></i> 2.2k</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-image" style="background-image: url('/placeholder.svg?height=200&width=300');">
+                            <span class="league-badge">RÉCORD</span>
+                        </div>
+                        <div class="news-content">
+                            <h3 class="news-title">Judge alcanza los 50 jonrones antes del All-Star Game</h3>
+                            <p class="news-excerpt">El slugger de los Yankees hace historia al convertirse en el jugador más rápido en alcanzar la marca de 50 bambinazos.</p>
+                            <div class="news-footer">
+                                <span>Hace 12 horas</span>
+                                <span><i class="fas fa-eye"></i> 3.1k</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-image" style="background-image: url('/placeholder.svg?height=200&width=300');">
+                            <span class="league-badge">INTERNACIONAL</span>
+                        </div>
+                        <div class="news-content">
+                            <h3 class="news-title">República Dominicana domina el Clásico Mundial Sub-23</h3>
+                            <p class="news-excerpt">Los dominicanos se coronan campeones tras vencer a Venezuela en una emocionante final disputada en Miami.</p>
+                            <div class="news-footer">
+                                <span>Hace 1 día</span>
+                                <span><i class="fas fa-eye"></i> 1.7k</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <aside class="sidebar">
+                <div class="widget">
+                    <h3 class="widget-title">Juegos en Vivo</h3>
+                    <div class="game-item">
+                        <div class="game-teams">
+                            <div class="team">
+                                <div class="team-logo"></div>
+                                <span>Yankees</span>
+                            </div>
+                            <div class="team">
+                                <div class="team-logo"></div>
+                                <span>Red Sox</span>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <div class="game-score">7-4</div>
+                            <div class="inning-info">
+                                <span class="live-indicator">EN VIVO</span>
+                                <div>7° Inning</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="game-item">
+                        <div class="game-teams">
+                            <div class="team">
+                                <div class="team-logo"></div>
+                                <span>Dodgers</span>
+                            </div>
+                            <div class="team">
+                                <div class="team-logo"></div>
+                                <span>Giants</span>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <div class="game-score">5-2</div>
+                            <div class="inning-info">
+                                <div style="color: #dc3545; font-weight: bold;">FINAL</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="game-item">
+                        <div class="game-teams">
+                            <div class="team">
+                                <div class="team-logo"></div>
+                                <span>Astros</span>
+                            </div>
+                            <div class="team">
+                                <div class="team-logo"></div>
+                                <span>Rangers</span>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <div class="game-score">3-1</div>
+                            <div class="inning-info">
+                                <span class="live-indicator">EN VIVO</span>
+                                <div>5° Inning</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="widget">
+                    <h3 class="widget-title">División Este AL</h3>
+                    <table class="standings-table">
+                        <thead>
+                            <tr>
+                                <th>Pos</th>
+                                <th>Equipo</th>
+                                <th>G-P</th>
+                                <th>%</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="position">1</td>
+                                <td>Yankees</td>
+                                <td><strong>65-45</strong></td>
+                                <td>.591</td>
+                            </tr>
+                            <tr>
+                                <td class="position">2</td>
+                                <td>Orioles</td>
+                                <td><strong>62-48</strong></td>
+                                <td>.564</td>
+                            </tr>
+                            <tr>
+                                <td class="position">3</td>
+                                <td>Blue Jays</td>
+                                <td><strong>58-52</strong></td>
+                                <td>.527</td>
+                            </tr>
+                            <tr>
+                                <td class="position">4</td>
+                                <td>Red Sox</td>
+                                <td><strong>55-55</strong></td>
+                                <td>.500</td>
+                            </tr>
+                            <tr>
+                                <td class="position">5</td>
+                                <td>Rays</td>
+                                <td><strong>48-62</strong></td>
+                                <td>.436</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="widget">
+                    <h3 class="widget-title">Próximos Juegos</h3>
+                    <div class="game-item">
+                        <div class="game-teams">
+                            <div class="team">
+                                <div class="team-logo"></div>
+                                <span>Braves</span>
+                            </div>
+                            <div class="team">
+                                <div class="team-logo"></div>
+                                <span>Mets</span>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <div class="inning-info">
+                                <div>Mañana</div>
+                                <div>19:10</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="game-item">
+                        <div class="game-teams">
+                            <div class="team">
+                                <div class="team-logo"></div>
+                                <span>Cubs</span>
+                            </div>
+                            <div class="team">
+                                <div class="team-logo"></div>
+                                <span>Cardinals</span>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <div class="inning-info">
+                                <div>Jueves</div>
+                                <div>20:15</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <script>
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
